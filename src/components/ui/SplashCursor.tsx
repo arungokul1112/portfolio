@@ -177,14 +177,14 @@ function SplashCursor({
       fragmentShaderSource: string;
       programs: any[];
       activeProgram: WebGLProgram | null;
-      uniforms: any[];
+      uniforms: any;
 
       constructor(vertexShader: WebGLShader, fragmentShaderSource: string) {
         this.vertexShader = vertexShader;
         this.fragmentShaderSource = fragmentShaderSource;
         this.programs = [];
         this.activeProgram = null;
-        this.uniforms = [];
+        this.uniforms = {};
       }
       setKeywords(keywords: string[]) {
         let hash = 0;
@@ -228,7 +228,7 @@ function SplashCursor({
     }
 
     function getUniforms(program: WebGLProgram) {
-      let uniforms: any = [];
+      let uniforms: any = {};
       let uniformCount = gl!.getProgramParameter(program, gl!.ACTIVE_UNIFORMS);
       for (let i = 0; i < uniformCount; i++) {
         let uniformName = gl!.getActiveUniform(program, i)!.name;
